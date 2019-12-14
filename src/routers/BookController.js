@@ -1,9 +1,10 @@
 const express = require('express')
+const auth = require('../middleware/auth')
 const Book = require('../models/Book')
 const Category = require('../models/Category')
 const router = new express.Router()
 
-router.post('/book', async (req, res) => {
+router.post('/book', auth, async (req, res) => {
   const book = new Book(req.body)
   try {
     await book.save()
@@ -39,7 +40,7 @@ router.get('/book/:id', async (req, res) => {
   }
 })
 
-router.patch('/book/:id', async (req, res) => {
+router.patch('/book/:id', auth, async (req, res) => {
   const updates = Object.keys(req.body)
   const allowedUpdates = ['description', 'completed']
   const isValidOperation = updates.every(update =>
@@ -66,7 +67,7 @@ router.patch('/book/:id', async (req, res) => {
   }
 })
 
-router.delete('/book/:id', async (req, res) => {
+router.delete('/book/:id', auth, async (req, res) => {
   try {
     const book = await Book.findByIdAndDelete(req.params.id)
 

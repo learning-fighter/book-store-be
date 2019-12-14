@@ -1,10 +1,11 @@
 const express = require('express')
+const auth = require('../middleware/auth')
 const Category = require('../models/Category')
 const Book = require('../models/Book')
 const router = new express.Router()
 
 
-router.post('/category', async (req, res) => {
+router.post('/category', auth, async (req, res) => {
   const category = new Category(req.body)
 
   try {
@@ -40,7 +41,7 @@ router.get('/category/:id', async (req, res) => {
   }
 })
 
-router.patch('/category/:id', async (req, res) => {
+router.patch('/category/:id', auth, async (req, res) => {
   const updates = Object.keys(req.body)
   const allowedUpdates = ['description', 'completed']
   const isValidOperation = updates.every(update =>
@@ -67,7 +68,7 @@ router.patch('/category/:id', async (req, res) => {
   }
 })
 
-router.delete('/category/:id', async (req, res) => {
+router.delete('/category/:id', auth, async (req, res) => {
   try {
     const category = await Category.findByIdAndDelete(req.params.id)
 
