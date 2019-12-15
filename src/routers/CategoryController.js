@@ -5,7 +5,7 @@ const Book = require('../models/Book')
 const router = new express.Router()
 
 
-router.post('/category', auth, async (req, res) => {
+router.post('/category', async (req, res) => {
   const category = new Category(req.body)
 
   try {

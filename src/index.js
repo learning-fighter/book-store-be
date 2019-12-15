@@ -15,6 +15,7 @@ const port = 8000
 const bookRouter = require('./routers/BookController')
 const categoryRouter = require('./routers/CategoryController')
 const userRouter = require('./routers/UserController')
+// const cartRouter = require('./routers/CartController')
 // const transactionRouter = require('./routers/transactionRouter')
 
 //validasi app.use
@@ -23,6 +24,7 @@ app.use(cors())
 app.use(userRouter)
 app.use(bookRouter)
 app.use(categoryRouter)
+// app.use(cartRouter)
 // app.use(transactionRouter)
 
 //validasi listen port

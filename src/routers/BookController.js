@@ -28,7 +28,7 @@ router.get('/book/:id', async (req, res) => {
   const _id = req.params.id
 
   try {
-    const book = await Book.findById(_id)
+    const book = await Book.findById(_id).populate('category', 'categoryName')
 
     if (!book) {
       return res.status(404).send()
