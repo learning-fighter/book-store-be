@@ -40,6 +40,23 @@ router.get('/book/:id', async (req, res) => {
   }
 })
 
+router.get('/bookCategory/:id', async (req, res) => {
+  const _id = req.params.id
+  // const category = req.params.category
+
+  try {
+    const book = await Book.findById(_id).populate('category', 'categoryName')
+
+    if (!book) {
+      return res.status(404).send()
+    }
+
+    res.send(book)
+  } catch (e) {
+    res.status(500).send()
+  }
+})
+
 router.patch('/book/:id', auth, async (req, res) => {
   const updates = Object.keys(req.body)
   const allowedUpdates = ['description', 'completed']
