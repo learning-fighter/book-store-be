@@ -106,6 +106,20 @@ router.get('/users/:id/avatar', async (req, res) => {
       res.status(404).send({ message: 'image not found' })
     }
 })
-  
+
+router.delete('/users/:id', async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id)
+
+    if (!user) {
+      res.status(404).send()
+    }
+
+    res.send(user)
+  } catch (e) {
+    res.status(500).send()
+  }
+})
+
 module.exports = router
   
