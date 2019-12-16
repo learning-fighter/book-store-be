@@ -45,15 +45,15 @@ router.get('/bookCategory/:id', async (req, res) => {
   // const category = req.params.category
 
   try {
-    const book = await Book.findById(_id).populate('category', 'categoryName')
+    const category = await Category.findById(_id)
 
-    if (!book) {
+    if (!category) {
       return res.status(404).send()
     }
 
-    res.send(book)
+    res.send(category)
   } catch (e) {
-    res.status(500).send()
+    res.status(500).send({e})
   }
 })
 
